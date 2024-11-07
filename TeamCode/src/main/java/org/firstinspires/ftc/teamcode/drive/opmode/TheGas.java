@@ -34,10 +34,10 @@ public class TheGas extends LinearOpMode {
             double rightX = gamepad1.right_stick_x; // Rotate
 
             // Calculate motor power
-            double frontLeftPower = leftY + leftX + rightX;
-            double rearLeftPower = leftY - leftX + rightX;
-            double frontRightPower = leftY - leftX - rightX;
-            double rearRightPower = leftY + leftX - rightX;
+            double frontLeftPower = leftY - leftX + rightX;
+            double rearLeftPower = leftY + leftX + rightX;
+            double frontRightPower = leftY + leftX - rightX;
+            double rearRightPower = leftY - leftX - rightX;
 
             // Normalize the power values if any exceed 1.0
             double maxPower = Math.max(Math.abs(frontLeftPower), Math.max(Math.abs(rearLeftPower),
