@@ -55,8 +55,8 @@ public class DriveConstants {
      * empirically tuned.
      */
     public static double kV = 0.00003;
-    public static double kA = 0;
-    public static double kStatic = 0.01917;
+    public static double kA = 0.01;
+    public static double kStatic = 0.02;
 
     /*
      * These values are used to generate the trajectories for you robot. To ensure proper operation,
@@ -74,9 +74,9 @@ public class DriveConstants {
      * Adjust the orientations here to match your robot. See the FTC SDK documentation for details.
      */
     public static RevHubOrientationOnRobot.LogoFacingDirection LOGO_FACING_DIR =
-            RevHubOrientationOnRobot.LogoFacingDirection.UP;
+            RevHubOrientationOnRobot.LogoFacingDirection.RIGHT;
     public static RevHubOrientationOnRobot.UsbFacingDirection USB_FACING_DIR =
-            RevHubOrientationOnRobot.UsbFacingDirection.FORWARD;
+            RevHubOrientationOnRobot.UsbFacingDirection.DOWN;
 
 
     public static double encoderTicksToInches(double ticks) {
