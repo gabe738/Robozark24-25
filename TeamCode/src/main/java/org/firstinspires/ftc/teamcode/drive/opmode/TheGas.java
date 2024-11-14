@@ -18,9 +18,9 @@ public class TheGas extends LinearOpMode {
     private DcMotorEx leftRear;
     private DcMotorEx rightFront;
     private DcMotorEx rightRear;
-    private CRServo extend;
-    private DcMotorEx angle;
-    private CRServo wheel;
+//    private CRServo extend;
+//    private DcMotorEx angle;
+//    private CRServo wheel;
     private double wheelPow = 0;
     private double angleAtBottom;
     long startTime;
@@ -39,9 +39,9 @@ public class TheGas extends LinearOpMode {
         rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
         rightRear = hardwareMap.get(DcMotorEx.class, "rightRear");
 
-        extend = hardwareMap.get(CRServo.class, "extend");
-        angle = hardwareMap.get(DcMotorEx.class, "angle");
-        wheel = hardwareMap.get(CRServo.class, "wheel");
+//        extend = hardwareMap.get(CRServo.class, "extend");
+//        angle = hardwareMap.get(DcMotorEx.class, "angle");
+//        wheel = hardwareMap.get(CRServo.class, "wheel");
 
         // Set motor directions if needed
         rightFront.setDirection(DcMotorEx.Direction.REVERSE);

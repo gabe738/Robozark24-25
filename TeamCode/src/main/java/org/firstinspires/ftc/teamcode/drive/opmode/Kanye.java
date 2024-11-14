@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 @Autonomous
-public class Skillet extends LinearOpMode {
+public class Kanye extends LinearOpMode {
 
     private DcMotorEx leftFront;
     private DcMotorEx leftRear;
@@ -110,16 +110,6 @@ public class Skillet extends LinearOpMode {
 
         // path of robot
         forward(42.0);
-        sleep(500);
-        backward(18.0);
-        sleep(500);
-        right(90.0);
-        sleep(500);
-        forward(55.0);
-        sleep(500);
-        right(90);
-        sleep(500);
-        forward(9.0);
 
     }
 }

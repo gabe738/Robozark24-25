@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 @Autonomous
-public class Skillet extends LinearOpMode {
+public class Tyler extends LinearOpMode {
 
     private DcMotorEx leftFront;
     private DcMotorEx leftRear;
