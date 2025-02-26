@@ -83,8 +83,10 @@ public class Kanye extends LinearOpMode {
         */
         
         // specimen
+        
+        // position
         sleep((long)200.0);
-        auto.wristAngle(0.6);
+        auto.wristAngle(0.65);
         auto.closeClaw();
         sleep((long)400.0);
         auto.forward(8.0);
@@ -93,14 +95,48 @@ public class Kanye extends LinearOpMode {
         auto.forward(18.0);
         sleep((long)300.0);
         auto.right(90.0);
-        auto.backward(15.0);
-        auto.extendUp(0.5);
-        auto.forward(32.0);
+        
+        // back against wall
+        leftFront.setPower(-0.3);
+        rightFront.setPower(-0.3);
+        leftRear.setPower(-0.3);
+        rightRear.setPower(-0.3);
+        sleep((long)700.0);
+        leftFront.setPower(0.0);
+        rightFront.setPower(0.0);
+        leftRear.setPower(0.0);
+        rightRear.setPower(0.0);
+        
+        
+        // hang specimen
+        auto.extendUp(0.6);
+                
+        leftFront.setPower(0.25);
+        rightFront.setPower(0.25);
+        leftRear.setPower(0.25);
+        rightRear.setPower(0.25);
+        sleep((long)3000.0);
+        leftFront.setPower(0.0);
+        rightFront.setPower(0.0);
+        leftRear.setPower(0.0);
+        rightRear.setPower(0.0);
+                
+        auto.backward(8.5);
         auto.extendDown(0.1);
-        sleep((long)100.0);
         auto.openClaw();
-        auto.forward(8.0);
-        auto.backward(52.0);
+        sleep((long)800.0);
+        
+        
+        // back against wall
+        leftFront.setPower(-0.3);
+        rightFront.setPower(-0.3);
+        leftRear.setPower(-0.3);
+        rightRear.setPower(-0.3);
+        sleep((long)2500.0);
+        leftFront.setPower(0.0);
+        rightFront.setPower(0.0);
+        leftRear.setPower(0.0);
+        rightRear.setPower(0.0);
         
         // park
         auto.forward(4.0);

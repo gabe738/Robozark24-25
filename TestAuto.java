@@ -81,16 +81,25 @@ public class TestAuto extends LinearOpMode {
             closeClaw()
         */
         
-        // specimen
-        auto.closeClaw();
-        auto.wristAngle(0.6);
-        sleep((long)5000.0);
-        auto.extendUp(0.7);
-        auto.forward(18.0);
-        auto.backward(10.0);
-        auto.extendDown(0.1);
-        sleep((long)100.0);
+        auto.wristAngle(0.47);
+        sleep((long)2000.0);
         auto.openClaw();
+        auto.forward(68.0);
+        auto.closeClaw();
+        auto.wristAngle(0.9);
+        sleep((long)1500.0);
+        auto.backward(60.0);
+        auto.left(90.0);
+        
+        auto.wristAngle(0.74);
+        sleep((long)500.0);
+        auto.extendUp(0.6);
+        auto.forward(48.0);
+        auto.backward(8.5);
+        auto.extendDown(0.1);
+        auto.openClaw();
+        sleep((long)800.0);
+        auto.backward(4.0);
         
     }
 }

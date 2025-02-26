@@ -23,6 +23,7 @@ public class AutoMethods extends LinearOpMode {
     public Servo wrist;
     public Servo claw;
     public double speed = 0.3;
+    public double extendSpeed = 0.5;
     
     public void extendUp(double distance){
         
@@ -32,7 +33,7 @@ public class AutoMethods extends LinearOpMode {
         while (running) {
             running = false;
             if (extend.getCurrentPosition() < distance*4250) {
-                extend.setPower(speed*1.3);
+                extend.setPower(extendSpeed);
                 running = true;
             }
 
@@ -48,7 +49,7 @@ public class AutoMethods extends LinearOpMode {
         while (running) {
             running = false;
             if (extend.getCurrentPosition() > distance*4250) {
-                extend.setPower(-speed*1.3);
+                extend.setPower(-extendSpeed);
                 running = true;
             }
 

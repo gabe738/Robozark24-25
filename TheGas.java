@@ -29,6 +29,7 @@ public class TheGas extends LinearOpMode {
     double clawPos = 0.3;
     double clawMult = 0.0005;
     double speedMult = 0.3;
+    boolean inAuto = false;
 
 
     @Override
@@ -44,6 +45,7 @@ public class TheGas extends LinearOpMode {
         
         angle = hardwareMap.get(Servo.class, "angle");
         // angle.setPosition(anglePos);
+        anglePos = angle.getPosition();
         
         claw = hardwareMap.get(Servo.class, "claw");
 
@@ -70,6 +72,7 @@ public class TheGas extends LinearOpMode {
 
         // Instance of autonomous class
         AutoMethods auto = new AutoMethods(leftFront, leftRear, rightFront, rightRear, extend, angle, claw);
+        auto.extendSpeed = 0.5;
 
         // Wait for the start button to be pressed
         waitForStart();
@@ -83,6 +86,13 @@ public class TheGas extends LinearOpMode {
 
             double extendPower = gamepad2.left_stick_y; // extend
             double anglePower = gamepad2.right_stick_y * angleMult; // wrist
+            if (anglePower < 0.0025 && anglePower > -0.0025) {
+                anglePower = 0.0;
+            } else if (anglePower > 0.0025) {
+                anglePower = 0.0025;
+            } else if (anglePower < -0.0025) {
+                anglePower = -0.0025;
+            }
             
             if (gamepad2.left_bumper) // claw
                 clawPower = 1;
@@ -125,39 +135,97 @@ public class TheGas extends LinearOpMode {
                 clawPos = 0.28;
             }
             
-            // Place specimen
+            // Place specimen if not using auto
             if (gamepad2.square){
                 anglePos = 0.72;
                 clawPos = 0.325;
             }
             
+            // place specimen auto
             if (gamepad1.triangle){
-                auto.closeClaw();
-                auto.wristAngle(0.6);
+                inAuto = true;
+                extend.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                extend.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                // auto.closeClaw();
+                angle.setPosition(0.65);
+                sleep((long)500.0);
+                auto.extendUp(0.6);
+                
+                leftFront.setPower(0.3);
+                rightFront.setPower(0.3);
+                leftRear.setPower(0.3);
+                rightRear.setPower(0.3);
                 sleep((long)1000.0);
-                auto.extendUp(0.6 - (extend.getCurrentPosition() / 4250));
-                auto.forward(18.0);
-                auto.backward(6.0);
+                leftFront.setPower(0.0);
+                rightFront.setPower(0.0);
+                leftRear.setPower(0.0);
+                rightRear.setPower(0.0);
+                
+                auto.backward(8.5);
                 auto.extendDown(0.1);
-                sleep((long)100.0);
                 auto.openClaw();
+                sleep((long)800.0);
+                auto.backward(4.0);
+                auto.wristAngle(0.7);
+                extend.setPower(-0.7);
+                sleep((long)1000.0);
+                extend.setPower(0.0);
+                clawPos = claw.getPosition();
+                anglePos = angle.getPosition();
+                inAuto = false;
             }
             
-            // wrist
-            anglePos += anglePower;
-            if (anglePos < 0.48)
-                anglePos = 0.48;
-            else if (anglePos > 0.85)
-                anglePos = 0.85;
-            angle.setPosition(anglePos);
+            // pick up specimen off wall
+            if (gamepad1.square){
+                inAuto = true;
+                auto.wristAngle(0.47);
+                auto.openClaw();
+                sleep((long)1000.0);
+                
+                leftFront.setPower(0.2);
+                rightFront.setPower(0.2);
+                leftRear.setPower(0.2);
+                rightRear.setPower(0.2);
+                sleep((long)700.0);
+                leftFront.setPower(0.0);
+                rightFront.setPower(0.0);
+                leftRear.setPower(0.0);
+                rightRear.setPower(0.0);
+                
+                auto.closeClaw();
+                auto.extendUp(0.14);
+                auto.backward(5.0);
+                auto.wristAngle(0.7);
+                extend.setPower(-0.7);
+                sleep((long)1000.0);
+                extend.setPower(0.0);
+                clawPos = claw.getPosition();
+                anglePos = angle.getPosition();
+                inAuto = false;
+            }
             
-            // claw
-            clawPos += clawPower * clawMult;
-            if (clawPos < 0.25)
-                clawPos = 0.25;
-            else if (clawPos > 0.325)
-                clawPos = 0.325;
-            claw.setPosition(clawPos);
+            if (gamepad1.circle) {
+                sleep((long)3000.0);
+            }
+            
+            if (!inAuto){
+                // wrist
+                anglePos += anglePower;
+                if (anglePos < 0.32)
+                    anglePos = 0.33;
+                else if (anglePos > 0.68)
+                    anglePos = 0.68;
+                angle.setPosition(anglePos);
+                
+                // claw
+                clawPos += clawPower * clawMult;
+                if (clawPos < 0.25)
+                    clawPos = 0.25;
+                else if (clawPos > 0.325)
+                    clawPos = 0.325;
+                claw.setPosition(clawPos);
+            }
+            
             
             // Telemetry for debugging (optional)
             telemetry.addData("FL Power", frontLeftPower);
